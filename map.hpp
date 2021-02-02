@@ -2,9 +2,18 @@
 #include <vector>
 #include <string>
 
+#include <include/bitmap/bitmap_image.hpp>
+
 class Map {
 	public:
-		explicit Map(int size, float altitude, float elevation, float noise, float erosion, float lakes, float structures, float habitation, Climate climate);
+		Map(int size, float altitude, float elevation, float noise, float erosion, float lakes, float structures, float habitation, Climate climate);
+
+		void create(int points);
+		void assign_elevations(int points);
+		void build_graph(std::vector<Vector2> points, VoronoiDiagram voronoi_diagram);
+		void lloyd_relaxation();
+
+		void save_image();
 
 		static std::string get_biome(Polygon);
 		void set_biomes();
@@ -12,9 +21,8 @@ class Map {
 		Edge lookup_edge(Polygon, Polygon);
 		Edge lookup_edge(Vertex, Vertex);
 	private:
-		int points;
+		int number_of_points; // Used for Voronoi diagram
 		int size; // Size in pixels
-		float lake_threshold;
 		float altitude; // 0 to 1.0 on sea and land features
 		float elevation; // 0 to 1.0 on how much flat and steep terrain features
 		float noise; // 0 to 1.0 based on amount of noise
@@ -28,4 +36,6 @@ class Map {
 		std::vector<Edge> edges;
 
 		Climate climate; // Base climate of the whole map
+		bitmap_image bitmap_image;
+		VoronoiDiagram voronoi_diagram;
 }
