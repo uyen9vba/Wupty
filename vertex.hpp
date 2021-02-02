@@ -2,12 +2,12 @@
 #include <vector>
 
 struct Vertex {
+	int index;
 	bool ocean;
 	bool water;
 	bool coast;
 	bool border;
-	bool river;
-	float elevation;
+	float altitude;
 	float moisture;
 
 	std::vector<Polygon> polygons;
@@ -16,4 +16,5 @@ struct Vertex {
 
 	Vertex downslope;
 	Vertex watershed;
+	Point point;
 }
