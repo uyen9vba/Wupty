@@ -1,0 +1,15 @@
+[submodule "include/FastNoise"]
+	path = include/FastNoise
+	url = https://github.com/Auburn/FastNoise
+[submodule "include/delaunay-triangulation"]
+	path = include/delaunay-triangulation
+	url = https://github.com/bl4ckb0ne/delaunay-triangulation
+[submodule "include/bitmap"]
+	path = include/bitmap
+	url = https://github.com/pvigier/FortuneAlgorithm
+[submodule "include/FortuneAlgorithm"]
+	path = include/FortuneAlgorithm
+	url = https://github.com/pvigier/FortuneAlgorithm
+[submodule "include/Catch2"]
+	path = include/Catch2
+	url = https://github.com/catchorg/Catch2
