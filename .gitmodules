@@ -6,7 +6,7 @@
 	url = https://github.com/bl4ckb0ne/delaunay-triangulation
 [submodule "include/bitmap"]
 	path = include/bitmap
-	url = https://github.com/pvigier/FortuneAlgorithm
+	url = https://github.com/ArashPartow/bitmap
 [submodule "include/FortuneAlgorithm"]
 	path = include/FortuneAlgorithm
 	url = https://github.com/pvigier/FortuneAlgorithm
