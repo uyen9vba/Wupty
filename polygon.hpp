@@ -2,7 +2,6 @@
 #include <vector>
 
 struct Polygon {
-	bool water;
 	bool ocean;
 	bool coast;
 	bool border;

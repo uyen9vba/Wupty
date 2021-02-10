@@ -35,8 +35,8 @@ class Map {
 	/*
 	 * Assign elevation to vertices
 	 */
-	void assign_elevations(int points) {
-			
+	void assign_attributes() {
+		
 	}
 
 	/*
@@ -47,41 +47,47 @@ class Map {
 		std::mt19937 mt19937(random_device());
 		std::uniform_real_distribution<> uniform_real_distribution(0.0, 1.0);
 
-		for (int a = 0; a < points.size(); a++) {
-			float polygon_altitude = uniform_real_distribution(mt19937);
-			Polygon polygon;
+		// Polygons
+		for (auto& a : voronoi_diagram.mSites) {
+			float elevation = uniform_real_distribution(mt19937);
+			Polygon polygon{elevation = elevation, index = a.index};
 			
-			if (polygon_altitude <= altitude) {
+			if (elevation <= altitude) {
 				polygon.ocean = true;
 			} else {
 				polygon.ocean = false;
 			}
-
-			polygon.index = voronoi_diagram.mSites[a].index;
+			
 			polygons.push_back(polygon);
 		}
+		
+		// Vertices
+		for (auto& a : voronoi_diagram.mVertices) {
+			Vertex vertex;
+
+			if (a.point.x == 0 || a.point.y == 0 || a.point.x == 1.0 || a.point.y == 1.0) {
+				vertex.border = true;
+			} else {
+				vertex.border = false;
+			}
+			
+			vertex.point.x = a.point.x;
+			vertex.point.y = a.point.y;
+			vertices.push(vertex);
+		}
+
+		// Edges
+		for (auto& a : voronoi_diagram.mHalfEdges) {
+			Point midpoint((a->origin.point.x + a->destination.point.x) / 2),
+			      ((a->origin.point.y + a->destination.point.y) /2);
+
+			Edge edge{midpoint = midpoint};
+		}
+				
 	}	
 	
 	void lloyd_relaxation() {
 		for (auto& a : voronoi_diagram.mFaces) {
 			if (a.	
-	/*
-	static std::vector<Vector2> generate_points(int size) {
-		std::vector<Vector2> points;
-
-		std::random_device random_device;
-		std::mt19937 mt19937(random_device());
-		std::uniform_real_distribution<float> uniform_real_distribution(0.0, 1.0);
-
-		for(a = 0; a < points; a++) {
-			Vector2 vector2 (uniform_real_distribution(mt19937),
-					uniform_real_distribution(mt19937));
-
-			points.push_back(point);
-		}
-
-		return points;
-	}
-	*/
 
 }
