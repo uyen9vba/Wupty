@@ -9,7 +9,7 @@ class Map {
 		Map(int size, float altitude, float elevation, float noise, float erosion, float lakes, float structures, float habitation, Climate climate);
 
 		void create(int points);
-		void assign_elevations(int points);
+		void assign_attributes();
 		void build_graph(std::vector<Vector2> points, VoronoiDiagram voronoi_diagram);
 		void lloyd_relaxation();
 

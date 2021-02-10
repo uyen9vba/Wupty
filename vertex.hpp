@@ -4,7 +4,6 @@
 struct Vertex {
 	int index;
 	bool ocean;
-	bool water;
 	bool coast;
 	bool border;
 	float altitude;
