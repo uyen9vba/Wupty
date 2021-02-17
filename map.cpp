@@ -29,14 +29,15 @@ class Map {
 		build_graph(points, voronoi_diagram);
 
 		// Assign elevations data
-		assign_elevations()
 	}
 	
 	/*
 	 * Assign elevation to vertices
 	 */
 	void assign_attributes() {
-		
+		for (auto& a : polygons) {
+
+
 	}
 
 	/*
@@ -82,12 +83,13 @@ class Map {
 			      ((a->origin.point.y + a->destination.point.y) /2);
 
 			Edge edge{midpoint = midpoint};
+			edges.push(edge);
 		}
 				
 	}	
 	
 	void lloyd_relaxation() {
 		for (auto& a : voronoi_diagram.mFaces) {
-			if (a.	
+			if (a.
 
 }
