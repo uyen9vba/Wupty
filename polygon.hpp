@@ -2,10 +2,10 @@
 #include <vector>
 
 struct Polygon {
-	bool ocean;
+	bool ocean; // initialized
 	bool coast;
-	bool border;
-	float elevation;
+	bool border; // initialized
+	float elevation; // initialized
 	float moisture;
 	std::vector<Polygon> adjacents;
 	std::vector<Edge> edges;

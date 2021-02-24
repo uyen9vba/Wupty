@@ -2,6 +2,7 @@
 #include <vector>
 #include <random>
 #include <string>
+#include <iostream>
 
 #include <include/FortuneAlgorithm/src/main.cpp>
 #include <include/FortuneAlgorithm/src/VoronoiDiagram.h>
@@ -23,23 +24,16 @@ class Map {
 		{}
 	
 	void create(int number_of_points) {
+		std::cout << "Generating voronoi diagram...\n";
 		voronoi_diagram = generateRandomDiagram(number_of_points);
 
-		// Build graph out of points and voronoidiagram
+		// Build graph out of points and voronoi diagram
+		std::cout << "Building graph...\n";
 		build_graph(points, voronoi_diagram);
 
-		// Assign elevations data
+
 	}
 	
-	/*
-	 * Assign elevation to vertices
-	 */
-	void assign_attributes() {
-		for (auto& a : polygons) {
-
-
-	}
-
 	/*
 	 * Initialize custom data 
 	 */
@@ -64,17 +58,25 @@ class Map {
 		
 		// Vertices
 		for (auto& a : voronoi_diagram.mVertices) {
-			Vertex vertex;
+			float elevation = uniform_real_distribution(mt19937);
+			Vertex vertex{elevation = elevation};
 
 			if (a.point.x == 0 || a.point.y == 0 || a.point.x == 1.0 || a.point.y == 1.0) {
 				vertex.border = true;
 			} else {
 				vertex.border = false;
 			}
-			
+
+			if (elevation <= altitude) {
+				vertex.ocean = true;
+			} else {
+				vertex.ocean = false;
+			}
+
+			vertex.index = a.it;
 			vertex.point.x = a.point.x;
 			vertex.point.y = a.point.y;
-			vertices.push(vertex);
+			vertices.push_back(vertex);
 		}
 
 		// Edges
@@ -83,7 +85,14 @@ class Map {
 			      ((a->origin.point.y + a->destination.point.y) /2);
 
 			Edge edge{midpoint = midpoint};
-			edges.push(edge);
+
+			if (vertices[a.origin->it].elevation =< vertices[a.destination->it].elevation) {
+				vertices[a.origin->it].downslope = *vertices[a.destination->it];
+			} else {
+				vertices[a.origin->it].downslope = nullptr;
+			}
+
+			edges.push_back(edge);
 		}
 				
 	}	

@@ -3,5 +3,5 @@
 
 struct Edge {
 	int river;
-	Point midpoint;
+	Point midpoint; // initalized 
 }
