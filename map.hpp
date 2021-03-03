@@ -6,20 +6,20 @@
 
 class Map {
 	public:
-		Map(int size, float altitude, float elevation, float noise, float erosion, float lakes, float structures, float habitation, Climate climate);
+		Map(int size, float altitude, float elevation, float noise,
+			float erosion, float lakes, float structures,
+			float habitation, Climate climate);
 
 		void create(int points);
 		void assign_attributes();
-		void build_graph(std::vector<Vector2> points, VoronoiDiagram voronoi_diagram);
+
+		void build_sites();
+		void build_vertices();
+		void build_halfedges();
+		
 		void lloyd_relaxation();
 
 		void save_image();
-
-		static std::string get_biome(Polygon);
-		void set_biomes();
-
-		Edge lookup_edge(Polygon, Polygon);
-		Edge lookup_edge(Vertex, Vertex);
 	private:
 		int number_of_points; // Used for Voronoi diagram
 		int size; // Size in pixels
@@ -32,8 +32,8 @@ class Map {
 		float habitation; // 0 to 1.0 based on habitation concentration
 		std::vector<Point> points;
 		std::vector<Vertex> vertices;
-		std::vector<Polygon> polygons;
-		std::vector<Edge> edges;
+		std::vector<Site> sites;
+		std::vector<HalfEdge> halfedges;
 
 		Climate climate; // Base climate of the whole map
 		bitmap_image bitmap_image;

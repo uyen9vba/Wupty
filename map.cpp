@@ -37,27 +37,31 @@ class Map {
 	/*
 	 * Initialize custom data 
 	 */
-	void build_graph(std::vector<Vector2> points, VoronoiDiagram voronoi_diagram) {
+	void build_sites() {
 		std::random_device random_device;
 		std::mt19937 mt19937(random_device());
 		std::uniform_real_distribution<> uniform_real_distribution(0.0, 1.0);
 
-		// Polygons
 		for (auto& a : voronoi_diagram.mSites) {
 			float elevation = uniform_real_distribution(mt19937);
 			Point point{x = a.x, y = a.y};
-			Polygon polygon{elevation = elevation, index = a.index, point = point};
+			Site site{elevation = elevation, index = a.index, point = point};
 
 			if (elevation <= altitude) {
-				polygon.ocean = true;
+				site.ocean = true;
 			} else {
-				polygon.ocean = false;
+				site.ocean = false;
 			}
 			
-			polygons.push_back(polygon);
+			sites.push_back(site);
 		}
+	}
 		
-		// Vertices
+	void build_vertices() {
+		std::random_device random_device;
+		std::mt19937 mt19937(random_device());
+		std::uniform_real_distribution<> uniform_real_distribution(0.0, 1.0);
+
 		for (auto& a : voronoi_diagram.mVertices) {
 			float elevation = uniform_real_distribution(mt19937);
 			Vertex vertex{elevation = elevation};
@@ -80,12 +84,14 @@ class Map {
 			vertices.push_back(vertex);
 		}
 
-		// Edges
+	}
+
+	void build_halfedges() {
 		for (auto& a : voronoi_diagram.mHalfEdges) {
 			Point midpoint((a->origin.point.x + a->destination.point.x) / 2),
 			      ((a->origin.point.y + a->destination.point.y) /2);
 
-			Edge edge{midpoint = midpoint};
+			HalfEdge halfedge{midpoint = midpoint};
 
 			if (vertices[a.origin->it].elevation =< vertices[a.destination->it].elevation) {
 				vertices[a.origin->it].downslope = *vertices[a.destination->it];
@@ -93,10 +99,8 @@ class Map {
 				vertices[a.origin->it].downslope = nullptr;
 			}
 
-			edges.push_back(edge);
-		}
-				
-	}	
+			halfedges.push_back(halfedge);
+	}
 	
 	void assign_attributes() {
 		for (auto& a : voronoi_diagram.mSites) {
