@@ -28,15 +28,14 @@ class Map {
 		voronoi_diagram = generateRandomDiagram(number_of_points);
 
 		// Build graph out of points and voronoi diagram
-		std::cout << "Building graph...\n";
-		build_graph(points, voronoi_diagram);
+		std::cout << "Building graphs...\n";
+		build_sites();
+		build_vertices();
+		build_halfedges();
 
 
 	}
 	
-	/*
-	 * Initialize custom data 
-	 */
 	void build_sites() {
 		std::random_device random_device;
 		std::mt19937 mt19937(random_device());
@@ -91,7 +90,7 @@ class Map {
 			Point midpoint((a->origin.point.x + a->destination.point.x) / 2),
 			      ((a->origin.point.y + a->destination.point.y) /2);
 
-			HalfEdge halfedge{midpoint = midpoint};
+			HalfEdge halfedge{midpoint = midpoint, site = a->incidentFace->site};
 
 			if (vertices[a.origin->it].elevation =< vertices[a.destination->it].elevation) {
 				vertices[a.origin->it].downslope = *vertices[a.destination->it];
@@ -102,11 +101,6 @@ class Map {
 			halfedges.push_back(halfedge);
 	}
 	
-	void assign_attributes() {
-		for (auto& a : voronoi_diagram.mSites) {
-			
-
-
 	void lloyd_relaxation() {
 		for (auto& a : voronoi_diagram.mFaces)
 

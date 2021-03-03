@@ -9,10 +9,6 @@ struct Vertex {
 	float elevation; // initialized
 	float moisture;
 
-	std::vector<Site> polygons;
-	std::vector<Edge> protrudes;
-	std::vector<Vertex> adjacents;
-
 	Vertex* downslope; // initialized
 	Vertex* watershed;
 	Point point; // initialized
