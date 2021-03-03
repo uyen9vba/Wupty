@@ -45,8 +45,9 @@ class Map {
 		// Polygons
 		for (auto& a : voronoi_diagram.mSites) {
 			float elevation = uniform_real_distribution(mt19937);
-			Polygon polygon{elevation = elevation, index = a.index};
-			
+			Point point{x = a.x, y = a.y};
+			Polygon polygon{elevation = elevation, index = a.index, point = point};
+
 			if (elevation <= altitude) {
 				polygon.ocean = true;
 			} else {
@@ -97,8 +98,14 @@ class Map {
 				
 	}	
 	
+	void assign_attributes() {
+		for (auto& a : voronoi_diagram.mSites) {
+			
+
+
 	void lloyd_relaxation() {
-		for (auto& a : voronoi_diagram.mFaces) {
-			if (a.
+		for (auto& a : voronoi_diagram.mFaces)
+
+	
 
 }

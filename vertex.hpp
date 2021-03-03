@@ -9,7 +9,7 @@ struct Vertex {
 	float elevation; // initialized
 	float moisture;
 
-	std::vector<Polygon> polygons;
+	std::vector<Site> polygons;
 	std::vector<Edge> protrudes;
 	std::vector<Vertex> adjacents;
 

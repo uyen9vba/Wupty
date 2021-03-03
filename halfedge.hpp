@@ -1,7 +1,7 @@
 
 #include <vector>
 
-struct Edge {
+struct HalfEdge {
 	int river;
 	Point midpoint; // initalized 
 }
